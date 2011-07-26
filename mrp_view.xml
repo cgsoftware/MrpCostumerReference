@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<openerp>
+  <data>
+
+
+    <record model="ir.ui.view" id="mrp_partner_tree">
+      <field name="name">mrp.partner.tree</field>
+      <field name="model">mrp.production</field>
+      <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+      <field name="arch" type="xml">
+ 			  
+        <field name="product_uom" position='after'>
+              <field name="partner_ref"  />
+              <field name="partner_rag_soc"  />
+          
+        </field>
+        <field name="routing_id" position='replace'/>
+        <field name="hour_total" position='replace'/>
+        <field name="cycle_total" position='replace'/>
+        <field name="state" position='after'>
+          <button name="button_cancel" states="draft,ready,in_production,picking_except" string="Cancel" icon="gtk-stop"/>
+          <button name="action_cancel" type="object" states="confirmed" string="Cancel" icon="gtk-stop"/>
+          <button name="button_confirm" states="draft" string="Confirm Production" icon="gtk-apply"/>
+          <button name="button_produce" states="ready" string="Start Production" icon="terp-gtk-jump-to-ltr"/>
+         
+           <button name="%(mrp.act_mrp_product_produce)d" states="in_production" string="Produce" icon="gtk-ok" type="action"/>
+          <button name="force_production" states="confirmed,picking_except" string="Force Reservation" type="object" icon="gtk-jump-to"/>
+          <button name="button_recreate" states="picking_except" string="Recreate Picking" icon="terp-document-new"/>
+          
+          </field>
+        
+  					
+        
+      </field>
+    </record>   
+    
+    <record model="ir.ui.view" id="mrp_partner_form">
+      <field name="name">mrp.partner.form</field>
+      <field name="model">mrp.production</field>
+      <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+      <field name="arch" type="xml">
+        
+        <field name="origin" position='after'>
+          <newline></newline>
+          <field name="partner_ref"  />
+          <field name="partner_rag_soc"  />
+          <newline></newline>
+        </field>
+
+        
+        
+      </field>
+    </record>   
+    
+    
+    </data>
+</openerp>
